@@ -38,7 +38,7 @@ namespace DynamicRouting.Kentico.Wildcards.Helpers
                 foreach (var item in urlMatchup.QueryStringPairs)
                 {
                     args.CurrentRequestContext.RouteData.Values.Add(item.Key, item.Value);
-                    //add these args to the ViewBag too for purposes of non controller page directs
+                    //TODO: add these args to the ViewBag too for purposes of non controller page directs
                 }
             }
 
@@ -95,6 +95,8 @@ namespace DynamicRouting.Kentico.Wildcards.Helpers
         public static void OverrideGetPageEvent(object sender, GetPageEventArgs args)
         {
             string cultureCode = args.Culture;
+
+            //Occasionally the culture code may come out as full text such as English - United Kingdom, using this info we can fetch the culture code
             if (args.Culture.Length > 5)
             {
                 cultureCode = CultureInfoProvider.GetCultures().Where(a => a.CultureName == args.Culture).First().CultureCode;
@@ -148,7 +150,7 @@ namespace DynamicRouting.Kentico.Wildcards.Helpers
                         {
                             return null;
                         }
-                    }, new CacheSettings(args.PreviewEnabled ? 0 : 1440, "DynamicRoutine.GetPage", args.RelativeUrl, cultureCode, args.DefaultCulture, args.SiteName, args.PreviewEnabled, args.ColumnsVal));
+                    }, new CacheSettings(args.PreviewEnabled ? 0 : 1440, "DynamicRouting.GetPage", args.RelativeUrl, cultureCode, args.DefaultCulture, args.SiteName, args.PreviewEnabled, args.ColumnsVal));
                 }
                 catch (Exception ex)
                 {

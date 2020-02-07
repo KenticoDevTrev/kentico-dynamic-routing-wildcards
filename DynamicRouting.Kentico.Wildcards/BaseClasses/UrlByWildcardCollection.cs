@@ -9,7 +9,7 @@ namespace DynamicRouting.Kentico.Wildcards.BaseClasses
 {
     public class UrlByWildcardCollection
     {
-        private static Regex WildcardFinder = new Regex("{(?<ParamName>[A-Za-z1-9]*)}");
+        private static Regex WildcardFinder = new Regex("{(?<ParamName>[a-zA-Z0-9À-ž]*)}");
 
         public UrlByWildcardCollection()
         {

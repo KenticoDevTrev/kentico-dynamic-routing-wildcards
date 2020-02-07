@@ -19,7 +19,7 @@ namespace DynamicRouting.Kentico.Wildcards.Helpers
     {
         public DynamicRouteWildcardInitializationModule() : base("DynamicRouteWildcardInitialisationModule")
         {
-
+            CMS.Modules.ModulePackagingEvents.Instance.BuildNuSpecManifest.After += BuildNuSpecManifest_After;
         }
 
         protected override void OnInit()
@@ -38,12 +38,12 @@ namespace DynamicRouting.Kentico.Wildcards.Helpers
         {
             if (e.ResourceName.Equals("DynamicRouting.Kentico.Wildcards", System.StringComparison.InvariantCultureIgnoreCase))
             {
-                e.Manifest.Metadata.Owners = "Kentico Community";
-                e.Manifest.Metadata.ProjectUrl = "https://github.com/KenticoDevTrev/DynamicRouting";
+                e.Manifest.Metadata.Owners = "reallymoving Ltd";
+                e.Manifest.Metadata.ProjectUrl = "https://github.com/reallymoving/kentico-dynamic-routing-wildcards";
                 e.Manifest.Metadata.IconUrl = "http://www.kentico.com/favicon.ico";
-                e.Manifest.Metadata.Copyright = "Copyright 2019 Kentico Community";
+                e.Manifest.Metadata.Copyright = "Copyright 2020 reallymoving Open Source";
                 e.Manifest.Metadata.Title = "Wildcard extension for Dynamic Routing for Kentico v12 SP";
-                e.Manifest.Metadata.ReleaseNotes = "Initial Commit, allowing for use of custom urls with wildcards to work as RouteData for MVC applications.";
+                e.Manifest.Metadata.ReleaseNotes = "Fixing multiple wildcards not correctly routing";
             }
         }
     }

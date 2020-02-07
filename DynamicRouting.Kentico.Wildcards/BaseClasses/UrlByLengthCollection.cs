@@ -25,9 +25,13 @@ namespace DynamicRouting.Kentico.Wildcards.BaseClasses
                 var urlLower = url.Key.ToLower().Trim('/');
                 var pathCount = PathMatcher.Match(urlLower).Groups["Path"].Captures.Count;
                 if (Urls.ContainsKey(pathCount))
+                {
                     Urls[pathCount].AddUrl(urlLower, url.Value);
+                }
                 else
+                {
                     Urls.Add(pathCount, new UrlByWildcardCollection(urlLower, url.Value));
+                }
             }
         }
 
@@ -36,7 +40,9 @@ namespace DynamicRouting.Kentico.Wildcards.BaseClasses
             urlToMatch = urlToMatch.ToLower().Trim('/');
             var pathCount = PathMatcher.Match(urlToMatch).Groups["Path"].Captures.Count;
             if (!Urls.ContainsKey(pathCount))
+            {
                 return MatchedUrl.FailedMatch();
+            }
 
             return Urls[pathCount].FindBaseUrl(urlToMatch);
         }
